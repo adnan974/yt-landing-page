@@ -1,0 +1,17 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero";
+import Features from "@/components/Features.astro";
+import CTA from "@/components/CTA";
+---
+
+<Layout
+  title="YT Landing Page — Grow Your YouTube Channel"
+  description="Powerful analytics, AI-powered content suggestions, and SEO tools for YouTube creators."
+>
+  <main>
+    <Hero client:load />
+    <Features />
+    <CTA client:load />
+  </main>
+</Layout>

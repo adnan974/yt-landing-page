@@ -1,0 +1,68 @@
+---
+const features = [
+  {
+    icon: "📊",
+    title: "Advanced Analytics",
+    description:
+      "Track views, watch time, subscribers, and revenue with real-time dashboards. Understand what works and double down on it.",
+  },
+  {
+    icon: "🤖",
+    title: "AI Content Ideas",
+    description:
+      "Get AI-powered video ideas based on trending topics in your niche. Never run out of content that your audience wants to watch.",
+  },
+  {
+    icon: "🔍",
+    title: "SEO Optimization",
+    description:
+      "Optimize titles, descriptions, and tags with our SEO score tool. Rank higher in search and get discovered by new viewers.",
+  },
+  {
+    icon: "📅",
+    title: "Content Calendar",
+    description:
+      "Plan and schedule your uploads with a visual content calendar. Stay consistent and build the habit that grows channels.",
+  },
+  {
+    icon: "💬",
+    title: "Comment Management",
+    description:
+      "Reply, filter, and analyze comments across all your videos in one place. Build a community without the overwhelm.",
+  },
+  {
+    icon: "📈",
+    title: "Competitor Insights",
+    description:
+      "Track what top channels in your niche are doing. Benchmark your performance and find gaps you can fill.",
+  },
+];
+---
+
+<section class="bg-muted/50 py-20">
+  <div class="container mx-auto max-w-6xl px-6">
+    <div class="mb-14 text-center">
+      <h2 class="mb-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        Everything you need to grow
+      </h2>
+      <p class="mx-auto max-w-xl text-muted-foreground">
+        A complete toolkit built for YouTube creators at every stage — from
+        getting your first 1,000 subscribers to scaling past 1 million.
+      </p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((feature) => (
+          <div class="rounded-xl border bg-card p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div class="mb-4 text-4xl">{feature.icon}</div>
+            <h3 class="mb-2 font-semibold text-card-foreground">
+              {feature.title}
+            </h3>
+            <p class="text-sm text-muted-foreground">{feature.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
