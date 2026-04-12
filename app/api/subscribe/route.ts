@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
       headers: {
         'Authorization': `Bearer ${MAILERLITE_API_KEY}`,
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       body: JSON.stringify({
         email: email.toLowerCase(),
@@ -118,6 +119,7 @@ export async function GET() {
         headers: {
           'Authorization': `Bearer ${MAILERLITE_API_KEY}`,
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
       }
     );
