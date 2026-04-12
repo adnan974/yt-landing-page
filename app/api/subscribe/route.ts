@@ -42,8 +42,8 @@ export async function POST(request: NextRequest) {
     }
 
     console.log('[POST /api/subscribe] Appel MailerLite API');
-    // Call MailerLite API
-    const apiUrl = `https://connect.mailerlite.com/api/groups/${MAILERLITE_GROUP_ID}/subscribers`;
+    // Call MailerLite API with correct endpoint
+    const apiUrl = 'https://connect.mailerlite.com/api/subscribers';
     console.log('[POST /api/subscribe] URL:', apiUrl);
 
     const response = await fetch(apiUrl, {
@@ -55,6 +55,7 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         email: email.toLowerCase(),
+        groups: [MAILERLITE_GROUP_ID],
         status: 'active',
       }),
     });
@@ -62,29 +63,30 @@ export async function POST(request: NextRequest) {
     const data = await response.json();
     console.log('[POST /api/subscribe] Réponse MailerLite:', response.status, data);
 
-    // Handle MailerLite errors
-    if (!response.ok) {
-      // If email already exists, that's okay
-      if (response.status === 422 && data.errors?.email) {
-        console.log('[POST /api/subscribe] Email déjà inscrit');
-        return NextResponse.json(
-          { message: 'Cet email est déjà inscrit.' },
-          { status: 200 }
-        );
-      }
-
-      console.error('[POST /api/subscribe] MailerLite Error:', data);
+    // Handle MailerLite responses
+    if (response.status === 200) {
+      // 200 = existing subscriber updated
+      console.log('[POST /api/subscribe] Email déjà existant - mis à jour');
       return NextResponse.json(
-        { message: 'Une erreur est survenue lors de l\'inscription.' },
-        { status: response.status }
+        { message: 'Cet email est déjà inscrit.' },
+        { status: 200 }
       );
     }
 
-    console.log('[POST /api/subscribe] Succès');
-    // Success
+    if (response.status === 201) {
+      // 201 = new subscriber created
+      console.log('[POST /api/subscribe] Succès - nouvel abonné');
+      return NextResponse.json(
+        { message: 'Inscription réussie !', subscriber: data },
+        { status: 201 }
+      );
+    }
+
+    // Any other status is an error
+    console.error('[POST /api/subscribe] MailerLite Error:', response.status, data);
     return NextResponse.json(
-      { message: 'Inscription réussie !', subscriber: data },
-      { status: 201 }
+      { message: 'Une erreur est survenue lors de l\'inscription.' },
+      { status: response.status }
     );
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
