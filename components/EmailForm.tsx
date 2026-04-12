@@ -1,41 +1,48 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
+type FormState = 'idle' | 'loading' | 'success' | 'error';
+
 export default function EmailForm() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [state, setState] = useState<FormState>('idle');
+  const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    // Load MailerLite embed script
-    const script = document.createElement('script');
-    script.src = 'https://assets.mailerlite.com/js/universal.js';
-    script.async = true;
-
-    script.onload = () => {
-      // Initialize MailerLite form
-      if (window.ML) {
-        window.ML('accounts', '699706', 'o6h8b3n5h5d1g7p5b2m1l9k8j7i6h5g4');
-      }
-    };
-
-    document.body.appendChild(script);
-
-    return () => {
-      // Clean up
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
-    // Simulate submission
-    setTimeout(() => setIsLoading(false), 1000);
+    setState('loading');
+    setMessage('');
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok || response.status === 200) {
+        setState('success');
+        setEmail('');
+        setMessage('✓ Inscription réussie !');
+        // Reset after 5 seconds
+        setTimeout(() => {
+          setState('idle');
+          setMessage('');
+        }, 5000);
+      } else {
+        setState('error');
+        setMessage(data.message || 'Une erreur est survenue');
+      }
+    } catch (error) {
+      setState('error');
+      setMessage('Une erreur est survenue');
+    }
   };
 
   return (
@@ -74,10 +81,6 @@ export default function EmailForm() {
 
           {/* Form wrapper */}
           <div className="relative bg-[#1a1f28] rounded-xl p-6 md:p-8 border border-[#2d3340]">
-            {/* MailerLite embed will be injected here */}
-            <div className="ml-embedded" data-form="o6h8b3n5h5d1g7p5b2m1l9k8j7i6h5g4" />
-
-            {/* Fallback form using shadcn/ui */}
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm font-medium text-foreground">
@@ -87,18 +90,30 @@ export default function EmailForm() {
                   id="email"
                   type="email"
                   placeholder="toi@example.com"
-                  className="bg-[#0f1419] border-[#2d3340] text-foreground placeholder:text-muted-foreground focus-visible:border-[#00d9ff] focus-visible:ring-2 focus-visible:ring-[#00d9ff]/20"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={state === 'loading'}
+                  className="bg-[#0f1419] border-[#2d3340] text-foreground placeholder:text-muted-foreground focus-visible:border-[#00d9ff] focus-visible:ring-2 focus-visible:ring-[#00d9ff]/20 disabled:opacity-50"
                   required
                 />
               </div>
 
               <Button
                 type="submit"
-                disabled={isLoading}
-                className="w-full bg-[#00d9ff] hover:bg-[#00d9ff]/90 text-[#0f1419] font-bold h-11 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-[#00d9ff]/30 active:scale-95"
+                disabled={state === 'loading' || state === 'success'}
+                className="w-full bg-[#00d9ff] hover:bg-[#00d9ff]/90 text-[#0f1419] font-bold h-11 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-[#00d9ff]/30 active:scale-95 disabled:opacity-50"
               >
-                {isLoading ? 'Inscription...' : 'Rejoins la newsletter →'}
+                {state === 'loading' && 'Inscription...'}
+                {state === 'success' && '✓ Inscrit !'}
+                {state === 'idle' && 'Rejoins la newsletter →'}
+                {state === 'error' && 'Réessayer'}
               </Button>
+
+              {message && (
+                <p className={`text-sm text-center ${state === 'success' ? 'text-[#76ff03]' : 'text-red-400'}`}>
+                  {message}
+                </p>
+              )}
             </form>
 
             {/* Trust badge */}
@@ -122,11 +137,4 @@ export default function EmailForm() {
       </div>
     </section>
   );
-}
-
-// Type for MailerLite global
-declare global {
-  interface Window {
-    ML?: (action: string, account: string, form: string) => void;
-  }
 }
