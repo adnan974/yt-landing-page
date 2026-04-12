@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-const API_URL = 'http://localhost:3001/api/subscribe';
+const API_URL = 'http://localhost:3002/api/subscribe';
 const BASE_TEST_EMAIL = `test-${Date.now()}`;
 
 /**
