@@ -1,0 +1,84 @@
+{
+  "project": "{{PROJECT_NAME}}",
+  "epics": [
+    {
+      "id": 1,
+      "title": "Epic Title",
+      "goal": "What users can accomplish after this epic",
+      "frs_covered": ["FR1", "FR2"],
+      "stories": [
+        {
+          "id": "1.1",
+          "title": "Story Title",
+          "as_a": "user",
+          "i_want": "to perform an action",
+          "so_that": "I get value from it",
+          "status": "todo",
+          "acceptance_criteria": [
+            {
+              "given": "a declarative precondition (not UI steps)",
+              "when": "a business action occurs",
+              "then": "the expected business outcome"
+            },
+            {
+              "given": "an edge case or error condition",
+              "when": "the action is attempted",
+              "then": "appropriate feedback is provided"
+            }
+          ],
+          "passes": false
+        },
+        {
+          "id": "1.2",
+          "title": "Story with value-based rules",
+          "as_a": "user",
+          "i_want": "to do something with thresholds or calculations",
+          "so_that": "I understand the business rules clearly",
+          "status": "todo",
+          "acceptance_criteria": [
+            {
+              "given": "a condition with <variable>",
+              "when": "the action is performed",
+              "then": "the result is <expected_outcome>",
+              "examples": [
+                {"variable": "value1", "expected_outcome": "result1", "note": "Normal case"},
+                {"variable": "boundary", "expected_outcome": "result2", "note": "Edge case at limit"},
+                {"variable": "invalid", "expected_outcome": "error", "note": "Error case"}
+              ]
+            }
+          ],
+          "passes": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Second Epic",
+      "goal": "What users can accomplish",
+      "frs_covered": ["FR3", "FR4"],
+      "stories": [
+        {
+          "id": "2.1",
+          "title": "Story Title",
+          "as_a": "admin",
+          "i_want": "to manage something",
+          "so_that": "I can administrate the system",
+          "status": "todo",
+          "acceptance_criteria": [
+            {
+              "given": "declarative admin context",
+              "when": "management action is performed",
+              "then": "system state reflects the change"
+            }
+          ],
+          "passes": false
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_epics": 2,
+    "total_stories": 3,
+    "fr_coverage": "100%"
+  }
+}
