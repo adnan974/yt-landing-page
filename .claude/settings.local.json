@@ -4,7 +4,12 @@
       "Bash(rm:*)",
       "Bash(mv next-app/* .)",
       "Bash(mv next-app/.* .)",
-      "Bash(rm -rf next-app)"
+      "Bash(rm -rf next-app)",
+      "Bash(kill 43524:*)",
+      "Bash(netstat -ano)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3001)",
+      "Bash(netstat -tuln)"
     ]
   }
 }
