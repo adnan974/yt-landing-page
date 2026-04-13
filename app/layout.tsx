@@ -38,11 +38,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="h-full scroll-smooth">
-      <body className="min-h-screen bg-[#0f1419] text-foreground antialiased flex flex-col">
+      <body className="min-h-screen bg-[#08090e] text-foreground antialiased flex flex-col">
         {children}
-        <footer className="mt-auto py-8 border-t border-[#2d3340]">
-          <div className="max-w-4xl mx-auto px-4 md:px-6 text-center text-sm text-muted-foreground">
-            <p>© 2026 Dev Newsletter. Tous droits réservés.</p>
+        <footer className="mt-auto py-8 border-t border-[#1e2535]">
+          <div className="max-w-4xl mx-auto px-4 md:px-6 text-center text-sm text-[#8a94a6]/50">
+            <p>&#169; 2026 Dev Newsletter. Tous droits r&#233;serv&#233;s.</p>
           </div>
         </footer>
       </body>

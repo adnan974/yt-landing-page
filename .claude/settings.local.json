@@ -9,7 +9,9 @@
       "Bash(netstat -ano)",
       "Bash(npm run:*)",
       "Bash(curl -s http://localhost:3001)",
-      "Bash(netstat -tuln)"
+      "Bash(netstat -tuln)",
+      "Bash(awk '{print $2}')",
+      "Bash(xargs -r kill -9)"
     ]
   }
 }
