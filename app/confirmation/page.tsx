@@ -58,9 +58,10 @@ export default function ConfirmationPage() {
               Ton premier email arrive très bientôt.
             </p>
             <p className="text-[#8a94a6]/70 text-sm leading-relaxed">
-              Si tu ne trouves pas,{" "}
-              <span className="text-[#00d4ef]/80">vérifie tes spams</span> — il
-              est peut-être coincé là-bas.
+              Si tu ne le vois pas, vérifie tes{" "}
+              <span className="text-[#00d4ef]/80">spams</span> ou l&rsquo;onglet{" "}
+              <span className="text-[#00d4ef]/80">Promotions</span>{" "}
+              — il est peut-être coincé là-bas.
             </p>
 
             {/* Divider */}
