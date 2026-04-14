@@ -130,7 +130,7 @@ export default function EmailForm() {
               >
                 <li>1 email / semaine</li>
                 <li>0 spam</li>
-                <li>D\u00e9sinscription en 1 clic</li>
+                <li>Désinscription en 1 clic</li>
               </ul>
             </div>
           </div>
