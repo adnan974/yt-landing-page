@@ -10,17 +10,16 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
-
         {/* Terminal-style badge */}
         <div
           className="inline-flex items-center gap-2 mb-10"
-          style={{ animation: 'fadeInUp 0.5s ease-out both' }}
+          style={{ animation: "fadeInUp 0.5s ease-out both" }}
         >
           <span
             className="font-mono text-xs text-[#00d4ef]/50 select-none"
             aria-hidden="true"
           >
-            {'>'}
+            {">"}
           </span>
           <span className="font-mono text-xs text-[#8a94a6] tracking-widest uppercase">
             Newsletter AI &amp; Dev
@@ -34,7 +33,7 @@ export default function HeroSection() {
         {/* Main headline */}
         <h1
           className="font-display text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold text-[#eef2f7] mb-5 leading-[0.95] tracking-tight"
-          style={{ animation: 'fadeInUp 0.6s ease-out 0.1s both' }}
+          style={{ animation: "fadeInUp 0.6s ease-out 0.1s both" }}
         >
           Maîtrisez Claude Code
           <br />
@@ -44,20 +43,20 @@ export default function HeroSection() {
         {/* Credibility subtitle */}
         <p
           className="text-base md:text-lg text-[#8a94a6] max-w-xl leading-relaxed mb-10"
-          style={{ animation: 'fadeInUp 0.6s ease-out 0.2s both' }}
+          style={{ animation: "fadeInUp 0.6s ease-out 0.2s both" }}
         >
-          Les{' '}
+          Les{" "}
           <strong className="text-[#eef2f7] font-semibold">
             16 techniques de Boris Cherny
-          </strong>{' '}
-          <span className="text-[#8a94a6]/50">(créateur de l&apos;outil)</span>
-          {' '}&#8212; classées par impact, ignorées par 99&nbsp;% des devs.
+          </strong>{" "}
+          <span className="text-[#8a94a6]/50">(créateur de l&apos;outil)</span>{" "}
+          &#8212; classées par impact, ignorées par 99&nbsp;% des devs.
         </p>
 
         {/* Value props */}
         <div
           className="space-y-3"
-          style={{ animation: 'fadeInUp 0.6s ease-out 0.3s both' }}
+          style={{ animation: "fadeInUp 0.6s ease-out 0.3s both" }}
         >
           <p className="font-mono text-xs text-[#8a94a6]/50 uppercase tracking-widest mb-5">
             Dès votre inscription :
@@ -74,8 +73,11 @@ export default function HeroSection() {
               <div className="h-px w-full bg-[#1e2535]" />
             </div>
             <p className="text-sm text-[#8a94a6] leading-relaxed">
-              <strong className="text-[#eef2f7] font-semibold">Le Guide PDF</strong>
-              {' '}&#8212; Les 16 conseils structurés S&#8209;Tier à C&#8209;Tier, prêts à appliquer.
+              <strong className="text-[#eef2f7] font-semibold">
+                Le Résumé
+              </strong>{" "}
+              &#8212; Les 16 conseils structurés S&#8209;Tier à C&#8209;Tier,
+              prêts à appliquer.
             </p>
           </div>
 
@@ -90,8 +92,11 @@ export default function HeroSection() {
               <div className="h-px w-full bg-[#1e2535]" />
             </div>
             <p className="text-sm text-[#8a94a6] leading-relaxed">
-              <strong className="text-[#eef2f7] font-semibold">Le Signal</strong>
-              {' '}&#8212; Un condensé hebdo. L&apos;essentiel de l&apos;IA Dev, sans le bruit.
+              <strong className="text-[#eef2f7] font-semibold">
+                Le Signal
+              </strong>{" "}
+              &#8212; Ma newsletter hebdo. L&apos;essentiel de l&apos;IA Dev,
+              sans le bruit. (Que j'écris moi-même !)
             </p>
           </div>
         </div>
