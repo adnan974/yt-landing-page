@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
 export default function EmailForm() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
@@ -26,13 +28,7 @@ export default function EmailForm() {
       const data = await response.json();
 
       if (response.ok || response.status === 200) {
-        setState("success");
-        setEmail("");
-        setMessage("Inscription\u00a0r\u00e9ussie\u00a0!");
-        setTimeout(() => {
-          setState("idle");
-          setMessage("");
-        }, 5000);
+        router.push("/confirmation");
       } else {
         setState("error");
         setMessage(data.message || "Une erreur est survenue");
@@ -69,7 +65,7 @@ export default function EmailForm() {
                 Accès gratuit
               </p>
               <h2 className="font-display text-xl md:text-2xl font-bold text-[#eef2f7]">
-                Recevez le résumé et la newsletter
+                Recevez le guide gratuitement
               </h2>
             </div>
 
@@ -108,8 +104,7 @@ export default function EmailForm() {
                       Inscription&#8230;
                     </span>
                   )}
-                  {state === "success" && "\u2713 Inscrit\u00a0!"}
-                  {state === "idle" && "S'incrire \u2192"}
+                  {state === "idle" && "Recevoir le guide \u2192"}
                   {state === "error" && "R\u00e9essayer \u2192"}
                 </Button>
               </div>
@@ -121,7 +116,7 @@ export default function EmailForm() {
                 aria-live="polite"
                 className={`mt-3 text-sm min-h-[1.25rem] transition-opacity duration-300 ${
                   message ? "opacity-100" : "opacity-0"
-                } ${state === "success" ? "text-[#7aff00]" : "text-red-400"}`}
+                } text-red-400`}
               >
                 {message || "\u00a0"}
               </p>
@@ -135,7 +130,7 @@ export default function EmailForm() {
               >
                 <li>1 email / semaine</li>
                 <li>0 spam</li>
-                <li>Désinscription en 1 clic</li>
+                <li>D\u00e9sinscription en 1 clic</li>
               </ul>
             </div>
           </div>
