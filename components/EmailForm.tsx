@@ -1,55 +1,54 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-type FormState = 'idle' | 'loading' | 'success' | 'error';
+type FormState = "idle" | "loading" | "success" | "error";
 
 export default function EmailForm() {
-  const [email, setEmail] = useState('');
-  const [state, setState] = useState<FormState>('idle');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState<FormState>("idle");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setState('loading');
-    setMessage('');
+    setState("loading");
+    setMessage("");
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
 
       if (response.ok || response.status === 200) {
-        setState('success');
-        setEmail('');
-        setMessage('Inscription\u00a0r\u00e9ussie\u00a0!');
+        setState("success");
+        setEmail("");
+        setMessage("Inscription\u00a0r\u00e9ussie\u00a0!");
         setTimeout(() => {
-          setState('idle');
-          setMessage('');
+          setState("idle");
+          setMessage("");
         }, 5000);
       } else {
-        setState('error');
-        setMessage(data.message || 'Une erreur est survenue');
+        setState("error");
+        setMessage(data.message || "Une erreur est survenue");
       }
     } catch {
-      setState('error');
-      setMessage('Une erreur est survenue');
+      setState("error");
+      setMessage("Une erreur est survenue");
     }
   };
 
-  const isDisabled = state === 'loading' || state === 'success';
+  const isDisabled = state === "loading" || state === "success";
 
   return (
     <section className="relative py-6 md:py-8">
       <div className="max-w-3xl mx-auto px-4 md:px-6">
-        <div style={{ animation: 'fadeInUp 0.6s ease-out 0.4s both' }}>
-
+        <div style={{ animation: "fadeInUp 0.6s ease-out 0.4s both" }}>
           {/* Top accent shimmer */}
           <div
             className="relative h-px mx-8 mb-0 overflow-hidden"
@@ -58,20 +57,19 @@ export default function EmailForm() {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00d4ef]/25 to-transparent" />
             <div
               className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-[#00d4ef]/60 to-transparent"
-              style={{ animation: 'shimmer 3s ease-in-out infinite' }}
+              style={{ animation: "shimmer 3s ease-in-out infinite" }}
             />
           </div>
 
           {/* Card */}
           <div className="bg-[#111520] rounded-2xl p-6 md:p-8 border border-[#1e2535]">
-
             {/* Card header */}
             <div className="mb-6">
               <p className="font-mono text-xs text-[#8a94a6]/50 uppercase tracking-widest mb-1">
                 Accès gratuit
               </p>
               <h2 className="font-display text-xl md:text-2xl font-bold text-[#eef2f7]">
-                Recevez le guide gratuitement
+                Recevez le résumé et la newsletter
               </h2>
             </div>
 
@@ -92,7 +90,7 @@ export default function EmailForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isDisabled}
                   required
-                  aria-describedby={message ? 'form-status' : undefined}
+                  aria-describedby={message ? "form-status" : undefined}
                   className="flex-1 h-11 bg-[#08090e] border-[#1e2535] text-[#eef2f7] placeholder:text-[#8a94a6]/40 focus-visible:border-[#00d4ef] focus-visible:ring-[#00d4ef]/20 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
 
@@ -101,7 +99,7 @@ export default function EmailForm() {
                   disabled={isDisabled}
                   className="h-11 px-6 shrink-0 bg-[#00d4ef] hover:bg-[#00d4ef]/90 text-[#08090e] font-bold rounded-lg transition-colors duration-200 hover:shadow-[0_0_24px_rgba(0,212,239,0.25)] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none disabled:scale-100"
                 >
-                  {state === 'loading' && (
+                  {state === "loading" && (
                     <span className="flex items-center gap-2">
                       <span
                         className="inline-block w-4 h-4 border-2 border-current border-r-transparent rounded-full animate-spin"
@@ -110,9 +108,9 @@ export default function EmailForm() {
                       Inscription&#8230;
                     </span>
                   )}
-                  {state === 'success' && '\u2713 Inscrit\u00a0!'}
-                  {state === 'idle' && 'Recevoir le guide \u2192'}
-                  {state === 'error' && 'R\u00e9essayer \u2192'}
+                  {state === "success" && "\u2713 Inscrit\u00a0!"}
+                  {state === "idle" && "S'incrire \u2192"}
+                  {state === "error" && "R\u00e9essayer \u2192"}
                 </Button>
               </div>
 
@@ -122,10 +120,10 @@ export default function EmailForm() {
                 role="status"
                 aria-live="polite"
                 className={`mt-3 text-sm min-h-[1.25rem] transition-opacity duration-300 ${
-                  message ? 'opacity-100' : 'opacity-0'
-                } ${state === 'success' ? 'text-[#7aff00]' : 'text-red-400'}`}
+                  message ? "opacity-100" : "opacity-0"
+                } ${state === "success" ? "text-[#7aff00]" : "text-red-400"}`}
               >
-                {message || '\u00a0'}
+                {message || "\u00a0"}
               </p>
             </form>
 
